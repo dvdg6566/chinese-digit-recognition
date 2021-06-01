@@ -1,22 +1,23 @@
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import io 
+import json
+import base64
+import numpy as np
+from PIL import Image
+import PIL.ImageOps
+from base64 import b64decode
+
 from flask import Flask
 from flask import request
-from keras.preprocessing import image
-from keras.preprocessing.image import img_to_array
-import numpy as np
-from keras.models import load_model
-import io 
-import base64
-import tensorflow as tf
-from PIL import Image
-from base64 import b64decode
-import PIL.ImageOps
-import json
 from flask_cors import CORS
 
-def preprocess_image(image,target_size=(26,26)):
+from keras.preprocessing import image
+from keras.preprocessing.image import img_to_array
+from keras.models import load_model
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+def preprocess_image(image,target_size=(26,26)):
     if image.mode != "L":
         image = image.convert("L") #Convert to grayscale
     image = PIL.ImageOps.invert(image) # Flip Black/white pixels
@@ -28,8 +29,6 @@ def preprocess_image(image,target_size=(26,26)):
 
 model = load_model("ccn4-accuracy-97.5.h5") #Load Model
 model.compile(loss='categorical_crossentropy',optimizer="adam",metrics=["categorical_accuracy"],run_eagerly=True)
-global grpah 
-graph = tf.compat.v1.get_default_graph() #Enable tensorflow to run properly
 
 def create_app(test_config=None):
     app = Flask(__name__,instance_relative_config=True)
@@ -74,7 +73,6 @@ def create_app(test_config=None):
             error = 'Invalid Request'
             return error      
     return app
-
 
 if __name__ == '__main__':
     print("DEPLOY MODE")

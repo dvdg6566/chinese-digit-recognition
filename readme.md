@@ -15,8 +15,8 @@ Usage
 - Instal the following packages
   - ```flask``` and ```flask-cors``` to run flask server
   - ```keras``` 
-  - ```tensorflow```
-  - ``` PIL``` Pillow imagine processing library
+  - ``` Pillow``` Pillow imagine processing library
 - Running
   - Run ```python3 __init__.py``` to run flask server
   - Open the HTML file ```index.html```
+
