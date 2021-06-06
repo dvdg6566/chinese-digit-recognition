@@ -14,7 +14,7 @@ Usage
   - To deactivate the virtual environment, run ```deactivate```
 - Instal the following packages
   - ```flask``` and ```flask-cors``` to run flask server
-  - ```keras``` 
+  - ```keras``` and ```tensorflow```
   - ``` Pillow``` Pillow imagine processing library
 - Running
   - Run ```python3 __init__.py``` to run flask server
